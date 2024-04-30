@@ -1,7 +1,8 @@
 import { useState } from "react";
 
 export default function ColorInput({ id }) {
-  const [hex, setHex] = useState("#123456");
+  const [hex, setHex] = useState("");
+  //maybe filled default, warning in console
 
   function handleHex(event) {
     setHex(event.target.value);
