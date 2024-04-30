@@ -23,27 +23,27 @@ export default function ColorForm({ onAddScheme }) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <fieldset className="">
-        <legend>Create your own color-scheme :</legend>
-        <label htmlFor="role">Role :</label>
-        <input
-          type="text"
-          id="role"
-          name="role"
-          value={role}
-          onChange={handleRole}
-          placeholder="e.g.: primary, secondary"
-          required
-        ></input>
-        <hr />
-        <label htmlFor="hex">Hex-value :</label>
-        <ColorInput id="hex" />
-        <hr />
-        <label htmlFor="contrastText">Contrast :</label>
-        <ColorInput id="contrastText" />
-        <hr />
-        <button type="submit">ADD SCHEME</button>
-      </fieldset>
+      <label htmlFor="role">Role :</label>
+      <br />
+      <input
+        type="text"
+        id="role"
+        name="role"
+        value={role}
+        onChange={handleRole}
+        placeholder="e.g.: primary, secondary"
+        required
+      />
+      <br />
+      <label htmlFor="hex">Hex-value :</label>
+      <br />
+      <ColorInput id="hex" />
+      <br />
+      <label htmlFor="contrastText">Contrast :</label>
+      <br />
+      <ColorInput id="contrastText" />
+      <br />
+      <button type="submit">ADD SCHEME</button>
     </form>
   );
 }

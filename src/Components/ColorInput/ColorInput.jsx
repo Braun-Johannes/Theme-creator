@@ -1,8 +1,7 @@
 import { useState } from "react";
 
 export default function ColorInput({ id }) {
-  const [hex, setHex] = useState("");
-  //maybe filled default, warning in console
+  const [hex, setHex] = useState("#f00000");
 
   function handleHex(event) {
     setHex(event.target.value);
@@ -16,7 +15,6 @@ export default function ColorInput({ id }) {
         type="text"
         value={hex}
         onChange={handleHex}
-        placeholder="#123213"
         required
       ></input>
       <input type="color" value={hex} onChange={handleHex} required></input>
