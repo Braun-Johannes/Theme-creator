@@ -12,28 +12,23 @@ function App() {
     setSchemes([{ id: uid(), ...newScheme }, ...schemes]);
   }
 
+  function handleDelete(id) {
+    setSchemes(schemes.filter((scheme) => scheme.id !== id));
+  }
+
   return (
     <>
       <h1>Theme Creator</h1>
-      <ColorForm onAddScheme={handleAddScheme} schemes={schemes} />
-
-      {schemes.map((color) => {
-        return <Color key={color.id} color={color} />;
-      })}
+      <ColorForm onAddScheme={handleAddScheme} />
+      {schemes.length === 0 ? (
+        <p>No schemes... Start by adding one!</p>
+      ) : (
+        schemes.map((color) => (
+          <Color key={color.id} color={color} onDelete={handleDelete} />
+        ))
+      )}
     </>
   );
 }
 
 export default App;
-
-// return (
-//   <>
-//     <h1>Theme Creator</h1>
-//     <ColorForm onAddScheme={handleAddScheme} />
-
-// {initialColors.map((color) => {
-//   return <Color key={color.id} color={color} />;
-//     })}
-//   </>
-// );
-// }
