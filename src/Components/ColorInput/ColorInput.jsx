@@ -1,10 +1,10 @@
 import { useState } from "react";
 
-export default function ColorInput({ id }) {
-  const [hex, setHex] = useState("#f00000");
+export default function ColorInput({ id, defaultValue }) {
+  const [inputValue, setInputValue] = useState(defaultValue || "#E60000");
 
-  function handleHex(event) {
-    setHex(event.target.value);
+  function handleInputValue(event) {
+    setInputValue(event.target.value);
   }
 
   return (
@@ -13,11 +13,16 @@ export default function ColorInput({ id }) {
         name={id}
         id={id}
         type="text"
-        value={hex}
-        onChange={handleHex}
+        value={inputValue}
+        onChange={handleInputValue}
         required
       ></input>
-      <input type="color" value={hex} onChange={handleHex} required></input>
+      <input
+        type="color"
+        value={inputValue}
+        onChange={handleInputValue}
+        required
+      ></input>
     </>
   );
 }

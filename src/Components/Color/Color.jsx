@@ -5,6 +5,7 @@ import ColorForm from "../ColorForm/ColorForm";
 export default function Color({ color, onDelete }) {
   const [deleteMode, setDeleteMode] = useState(false);
   const [editMode, setEditMode] = useState(false);
+  const [editedScheme, setEditedScheme] = useState(color);
 
   function handleDeleteBool() {
     if (deleteMode) {
@@ -14,9 +15,15 @@ export default function Color({ color, onDelete }) {
     }
   }
 
-  function toggleEditMode() {
+  function handleEditMode() {
     setEditMode(!editMode);
   }
+
+  function handleSchemeUpdate(newSchemeData) {
+    setEditedScheme(newSchemeData);
+    setEditMode(false);
+  }
+  // function ändern
 
   return (
     <div
@@ -30,7 +37,11 @@ export default function Color({ color, onDelete }) {
       <h4>{color.role}</h4>
       <p>contrast: {color.contrastText}</p>
       {editMode ? (
-        <ColorForm />
+        <ColorForm
+          schemes={editedScheme}
+          onSubmitScheme={handleSchemeUpdate}
+          onCancel={handleEditMode}
+        />
       ) : deleteMode ? (
         <p className="color-card-hightlight">
           Really delete?
@@ -39,7 +50,7 @@ export default function Color({ color, onDelete }) {
         </p>
       ) : (
         <>
-          <button onClick={toggleEditMode}>EDIT</button>
+          <button onClick={handleEditMode}>EDIT</button>
           <button onClick={handleDeleteBool}>Delete</button>
         </>
       )}

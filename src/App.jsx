@@ -8,7 +8,7 @@ import { uid } from "uid";
 function App() {
   const [schemes, setSchemes] = useState(initialColors);
 
-  function handleAddScheme(newScheme) {
+  function handleSubmitScheme(newScheme) {
     setSchemes([{ id: uid(), ...newScheme }, ...schemes]);
   }
 
@@ -19,7 +19,10 @@ function App() {
   return (
     <>
       <h1>Theme Creator</h1>
-      <ColorForm onAddScheme={handleAddScheme} />
+      <ColorForm
+        onSubmitScheme={handleSubmitScheme}
+        initialData={initialColors}
+      />
       {schemes.length === 0 ? (
         <p>No schemes... Start by adding one!</p>
       ) : (
@@ -30,5 +33,4 @@ function App() {
     </>
   );
 }
-
 export default App;
