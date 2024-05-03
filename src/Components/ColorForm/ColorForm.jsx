@@ -51,4 +51,3 @@ export default function ColorForm({
     </form>
   );
 }
-//42 -> keine Ausführung auf Update!!!!
