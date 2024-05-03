@@ -27,27 +27,35 @@ export default function ColorForm({
 
   return (
     <form onSubmit={handleSubmit}>
-      <label htmlFor="role">Role :</label>
-      <br />
-      <input
-        type="text"
-        id="role"
-        name="role"
-        defaultValue={initialData.role}
-        placeholder="e.g.: primary, secondary"
-        required
-      />
-      <br />
-      <label htmlFor="hex">Hex-value :</label>
-      <br />
-      <ColorInput id="hex" defaultValue={initialData.hex} />
-      <br />
-      <label htmlFor="contrastText">Contrast :</label>
-      <br />
-      <ColorInput id="contrastText" defaultValue={initialData.contrastText} />
-      <br />
-      <button type="submit">{initialData.id ? "UPDATE" : "ADD SCHEME"}</button>
-      {initialData.id && <button onClick={onCancel}>CANCEL</button>}
+      <fieldset>
+        <legend>
+          <h1>Theme Creator</h1>
+        </legend>
+        <label htmlFor="role">Role :</label>
+        <br />
+        <input
+          type="text"
+          id="role"
+          name="role"
+          defaultValue={initialData.role}
+          placeholder="e.g.: primary, secondary"
+          required
+        />
+        <br />
+        <label htmlFor="hex">Hex-value :</label>
+        <br />
+        <ColorInput id="hex" defaultValue={initialData.hex} />
+        <br />
+        <label htmlFor="contrastText">Contrast :</label>
+        <br />
+        <ColorInput id="contrastText" defaultValue={initialData.contrastText} />
+        <br />
+        <br />
+        <button type="submit">
+          {initialData.id ? "UPDATE" : "ADD SCHEME"}
+        </button>
+        {initialData.id && <button onClick={onCancel}>CANCEL</button>}
+      </fieldset>
     </form>
   );
 }

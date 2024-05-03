@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import "../Copy/copy.css";
 
 export default function Copy({ hexCode }) {
   const [copied, setCopied] = useState(false);
@@ -25,7 +26,7 @@ export default function Copy({ hexCode }) {
   return (
     <>
       <button onClick={copyToClipboard}>Copy</button>
-      {copied && <h3>Color copied!</h3>}
+      {copied && <h4 className="confirm">Color copied!</h4>}
     </>
   );
 }

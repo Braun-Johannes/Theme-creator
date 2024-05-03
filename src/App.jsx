@@ -32,7 +32,6 @@ function App() {
 
   return (
     <>
-      <h1>Theme Creator</h1>
       <ColorForm onSubmitScheme={handleSubmitScheme} />
       {schemes.length === 0 ? (
         <p>No schemes... Start by adding one!</p>
