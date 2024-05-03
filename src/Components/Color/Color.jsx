@@ -1,10 +1,12 @@
 import { useState } from "react";
 import "./Color.css";
 import ColorForm from "../ColorForm/ColorForm";
+import Copy from "../Copy/Copy";
 
 export default function Color({ color, onDelete, onEditScheme }) {
   const [deleteMode, setDeleteMode] = useState(false);
   const [editMode, setEditMode] = useState(false);
+  const [copyMode, setCopyMode] = useState(false);
 
   function handleDeleteBool() {
     if (deleteMode) {
@@ -18,6 +20,10 @@ export default function Color({ color, onDelete, onEditScheme }) {
     setEditMode(!editMode);
   }
 
+  function handleCopyMode() {
+    setCopyMode(!copyMode);
+  }
+
   return (
     <div
       className="color-card"
@@ -26,7 +32,7 @@ export default function Color({ color, onDelete, onEditScheme }) {
         color: color.contrastText,
       }}
     >
-      <h3 className="color-card-headline">{color.hex}</h3>
+      <h3 className="color-card-headline">{color.hex}</h3> <Copy />
       <h4>{color.role}</h4>
       <p>contrast: {color.contrastText}</p>
       {editMode ? (
