@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./Color.css";
 import ColorForm from "../ColorForm/ColorForm";
+import Copy from "../Copy/Copy";
 
 export default function Color({ color, onDelete, onEditScheme }) {
   const [deleteMode, setDeleteMode] = useState(false);
@@ -26,7 +27,8 @@ export default function Color({ color, onDelete, onEditScheme }) {
         color: color.contrastText,
       }}
     >
-      <h3 className="color-card-headline">{color.hex}</h3>
+      <h3 className="color-card-headline">{color.hex}</h3>{" "}
+      <Copy hexCode={color.hex} />
       <h4>{color.role}</h4>
       <p>contrast: {color.contrastText}</p>
       {editMode ? (
