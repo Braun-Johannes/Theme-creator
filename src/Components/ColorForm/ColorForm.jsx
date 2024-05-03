@@ -3,15 +3,21 @@ import ColorInput from "../ColorInput/ColorInput";
 
 export default function ColorForm({
   onSubmitScheme,
-  initialData = { role: "", hex: "", contrastText: "" },
-  schemes,
+  initialData = { role: "", hex: "#11ff00", contrastText: "#000000" },
   onCancel,
+  editMode,
+  setEditMode,
 }) {
   function handleSubmit(event) {
     event.preventDefault();
 
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
+
+    if (editMode) {
+      data.id = initialData.id;
+      setEditMode(false);
+    }
 
     onSubmitScheme(data);
 
@@ -40,8 +46,8 @@ export default function ColorForm({
       <br />
       <ColorInput id="contrastText" defaultValue={initialData.contrastText} />
       <br />
-      <button type="submit">{schemes ? "UPDATE" : "ADD SCHEME"}</button>
-      {schemes && <button onClick={onCancel}>CANCEL</button>}
+      <button type="submit">{initialData.id ? "UPDATE" : "ADD SCHEME"}</button>
+      {initialData.id && <button onClick={onCancel}>CANCEL</button>}
     </form>
   );
 }

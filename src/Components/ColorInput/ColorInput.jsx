@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export default function ColorInput({ id, defaultValue }) {
-  const [inputValue, setInputValue] = useState(defaultValue || "#E60000");
+  const [inputValue, setInputValue] = useState(defaultValue);
 
   function handleInputValue(event) {
     setInputValue(event.target.value);

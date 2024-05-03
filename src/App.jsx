@@ -16,18 +16,31 @@ function App() {
     setSchemes(schemes.filter((scheme) => scheme.id !== id));
   }
 
+  function handleEditScheme(editScheme) {
+    setSchemes(
+      schemes.map((scheme) => {
+        if (scheme.id === editScheme.id) {
+          return editScheme;
+        }
+        return scheme;
+      })
+    );
+  }
+
   return (
     <>
       <h1>Theme Creator</h1>
-      <ColorForm
-        onSubmitScheme={handleSubmitScheme}
-        initialData={initialColors}
-      />
+      <ColorForm onSubmitScheme={handleSubmitScheme} />
       {schemes.length === 0 ? (
         <p>No schemes... Start by adding one!</p>
       ) : (
         schemes.map((color) => (
-          <Color key={color.id} color={color} onDelete={handleDelete} />
+          <Color
+            key={color.id}
+            color={color}
+            onEditScheme={handleEditScheme}
+            onDelete={handleDelete}
+          />
         ))
       )}
     </>

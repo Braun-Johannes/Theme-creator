@@ -2,10 +2,9 @@ import { useState } from "react";
 import "./Color.css";
 import ColorForm from "../ColorForm/ColorForm";
 
-export default function Color({ color, onDelete }) {
+export default function Color({ color, onDelete, onEditScheme }) {
   const [deleteMode, setDeleteMode] = useState(false);
   const [editMode, setEditMode] = useState(false);
-  const [editedScheme, setEditedScheme] = useState(color);
 
   function handleDeleteBool() {
     if (deleteMode) {
@@ -18,12 +17,6 @@ export default function Color({ color, onDelete }) {
   function handleEditMode() {
     setEditMode(!editMode);
   }
-
-  function handleSchemeUpdate(newSchemeData) {
-    setEditedScheme(newSchemeData);
-    setEditMode(false);
-  }
-  // function ändern
 
   return (
     <div
@@ -38,8 +31,10 @@ export default function Color({ color, onDelete }) {
       <p>contrast: {color.contrastText}</p>
       {editMode ? (
         <ColorForm
-          schemes={editedScheme}
-          onSubmitScheme={handleSchemeUpdate}
+          editMode={editMode}
+          setEditMode={setEditMode}
+          initialData={color}
+          onSubmitScheme={onEditScheme}
           onCancel={handleEditMode}
         />
       ) : deleteMode ? (
