@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Copy({ hexCode }) {
   const [copied, setCopied] = useState(false);
@@ -12,10 +12,30 @@ export default function Copy({ hexCode }) {
     }
   }
 
+  useEffect(() => {
+    let timer;
+    if (copied) {
+      timer = setTimeout(() => {
+        setCopied(false);
+      }, 3000);
+    }
+    return () => clearTimeout(timer);
+  }, [copied]);
+
   return (
     <>
       <button onClick={copyToClipboard}>Copy</button>
-      {copied && <p>Color copied to clipboard!</p>}
+      {copied && <h3>Color copied!</h3>}
     </>
   );
 }
+
+//<button onClick={copyToClipboard}>{copied ? "Copy successful : "Copy"}</button>
+
+//   function copyToClipboard() {
+//     navigator.clipboard
+//       .writeText(hexCode)
+//       .then(() => setCopied(true))
+//       .catch((error) => console.error("Failed to copy: ", error));
+//   }
+// Option instead of async function
