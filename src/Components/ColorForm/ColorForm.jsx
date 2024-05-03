@@ -1,21 +1,25 @@
 import "../ColorForm/colorForm.css";
-import { useState } from "react";
 import ColorInput from "../ColorInput/ColorInput";
 
-export default function ColorForm({ onAddScheme }) {
-  const [role, setRole] = useState("");
-
-  function handleRole(event) {
-    setRole(event.target.value);
-  }
-
+export default function ColorForm({
+  onSubmitScheme,
+  initialData = { role: "", hex: "#11ff00", contrastText: "#000000" },
+  onCancel,
+  editMode,
+  setEditMode,
+}) {
   function handleSubmit(event) {
     event.preventDefault();
 
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
 
-    onAddScheme(data);
+    if (editMode) {
+      data.id = initialData.id;
+      setEditMode(false);
+    }
+
+    onSubmitScheme(data);
 
     event.target.reset();
     event.target.elements.role.focus();
@@ -29,21 +33,21 @@ export default function ColorForm({ onAddScheme }) {
         type="text"
         id="role"
         name="role"
-        value={role}
-        onChange={handleRole}
+        defaultValue={initialData.role}
         placeholder="e.g.: primary, secondary"
         required
       />
       <br />
       <label htmlFor="hex">Hex-value :</label>
       <br />
-      <ColorInput id="hex" />
+      <ColorInput id="hex" defaultValue={initialData.hex} />
       <br />
       <label htmlFor="contrastText">Contrast :</label>
       <br />
-      <ColorInput id="contrastText" />
+      <ColorInput id="contrastText" defaultValue={initialData.contrastText} />
       <br />
-      <button type="submit">ADD SCHEME</button>
+      <button type="submit">{initialData.id ? "UPDATE" : "ADD SCHEME"}</button>
+      {initialData.id && <button onClick={onCancel}>CANCEL</button>}
     </form>
   );
 }

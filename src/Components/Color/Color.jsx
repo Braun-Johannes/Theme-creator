@@ -1,15 +1,21 @@
 import { useState } from "react";
 import "./Color.css";
+import ColorForm from "../ColorForm/ColorForm";
 
-export default function Color({ color, onDelete }) {
-  const [confirmDelete, setConfirmDelete] = useState(false);
+export default function Color({ color, onDelete, onEditScheme }) {
+  const [deleteMode, setDeleteMode] = useState(false);
+  const [editMode, setEditMode] = useState(false);
 
   function handleDeleteBool() {
-    if (confirmDelete) {
+    if (deleteMode) {
       onDelete(color.id);
     } else {
-      setConfirmDelete(true);
+      setDeleteMode(true);
     }
+  }
+
+  function handleEditMode() {
+    setEditMode(!editMode);
   }
 
   return (
@@ -23,14 +29,25 @@ export default function Color({ color, onDelete }) {
       <h3 className="color-card-headline">{color.hex}</h3>
       <h4>{color.role}</h4>
       <p>contrast: {color.contrastText}</p>
-      {confirmDelete ? (
+      {editMode ? (
+        <ColorForm
+          editMode={editMode}
+          setEditMode={setEditMode}
+          initialData={color}
+          onSubmitScheme={onEditScheme}
+          onCancel={handleEditMode}
+        />
+      ) : deleteMode ? (
         <p className="color-card-hightlight">
           Really delete?
-          <button onClick={() => setConfirmDelete(false)}>Cancel</button>
+          <button onClick={() => setDeleteMode(false)}>Cancel</button>
           <button onClick={handleDeleteBool}>Confirm Delete</button>
         </p>
       ) : (
-        <button onClick={handleDeleteBool}>Delete</button>
+        <>
+          <button onClick={handleEditMode}>EDIT</button>
+          <button onClick={handleDeleteBool}>Delete</button>
+        </>
       )}
     </div>
   );
