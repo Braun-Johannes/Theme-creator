@@ -2,11 +2,14 @@ import { initialColors } from "./lib/colors";
 import Color from "./Components/Color/Color";
 import "./App.css";
 import ColorForm from "./Components/ColorForm/ColorForm";
-import { useState } from "react";
+
 import { uid } from "uid";
+import useLocalStorageState from "use-local-storage-state";
 
 function App() {
-  const [schemes, setSchemes] = useState(initialColors);
+  const [schemes, setSchemes] = useLocalStorageState("schemes", {
+    defaultValue: initialColors,
+  });
 
   function handleSubmitScheme(newScheme) {
     setSchemes([{ id: uid(), ...newScheme }, ...schemes]);
