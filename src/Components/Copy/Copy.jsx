@@ -31,11 +31,3 @@ export default function Copy({ hexCode }) {
 }
 
 //<button onClick={copyToClipboard}>{copied ? "Copy successful : "Copy"}</button>
-
-//   function copyToClipboard() {
-//     navigator.clipboard
-//       .writeText(hexCode)
-//       .then(() => setCopied(true))
-//       .catch((error) => console.error("Failed to copy: ", error));
-//   }
-// Option instead of async function
